@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  backend_prod_db:
+    image: postgres:15.1-alpine
+    volumes:
+      - data_backend_prod:/var/lib/postgresql/data/
+      - ../db/:/db
+    environment:
+      POSTGRES_PASSWORD: mikroways
+      POSTGRES_USER: root
+      POSTGRES_DB: mikroways
+    container_name: backend_prod_db
+    ports:
+      - 5432:5432
+  backend_prod_backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.prod
+    volumes:
+      - ../:/usr/src/app/
+      - static_volume:/usr/src/app/backend_prod/staticfiles
+    expose:
+      - 8000
+    environment:
+      POSTGRES_NAME: mikroways
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: mikroways
+      POSTGRES_HOST: backend_prod_db
+      POSTGRES_PORT: 5432
+      DJANGO_SETTINGS_MODULE: backend_prod.settings
+      DJANGO_SECRET_KEY: dsadsadds
+      DJANGO_MODE_DEBUG: 1
+    depends_on:
+      - backend_prod_db
+    container_name: backend_prod_backend
+  nginx:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.nginx.prod
+    depends_on:
+      - backend_prod_backend
+    volumes:
+      - static_volume:/usr/src/app/backend_prod/staticfiles
+    container_name: backend_prod_nginx
+    ports:
+      - 8080:80
+volumes:
+  data_backend_prod:
+  static_volume:
