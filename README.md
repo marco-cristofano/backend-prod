@@ -2,7 +2,7 @@
 El presente documento contiene los pasos necesarios para inicializar el backend de producción
 
                 
-1. Descargar el respoitorio
+1. Clonar el respoitorio
 2. Ingresar a la carpeta docker
 3. Ejecutar docker-compose build
 4. Ejecutar docker-compose up

@@ -1,4 +1,4 @@
-FROM python:3.11-alpine
+FROM python:3.11-alpine as builder
 ENV PYTHONUNBUFFERED 1
 RUN apk add --no-cache bash postgresql-dev linux-headers gcc musl-dev build-base libmagic
 WORKDIR /usr/src/app
