@@ -27,7 +27,7 @@ services:
       POSTGRES_HOST: backend_prod_db
       POSTGRES_PORT: 5432
       DJANGO_SETTINGS_MODULE: backend_prod.settings
-      DJANGO_SECRET_KEY: dsadsadds
+      DJANGO_SECRET_KEY: ClaveSecreta
       DJANGO_MODE_DEBUG: 1
     depends_on:
       - backend_prod_db
