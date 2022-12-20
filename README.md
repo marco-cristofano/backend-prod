@@ -8,4 +8,4 @@ El presente documento contiene los pasos necesarios para inicializar el backend 
 4. Ejecutar docker-compose up
 
 
-Endpoint http://127.0.0.1:8005/ping/
+Endpoint http://127.0.0.1:8080/ping/
